@@ -4,7 +4,6 @@ const director_id = getUserID()
 
 const getTeacherData = () => {
     const name = document.querySelector('#name')
-    const school = document.querySelector('#school')
     const grade = document.querySelector('#grade')
     const letter = document.querySelector('#letter')
 
@@ -15,9 +14,7 @@ const getTeacherData = () => {
                 createNotification('Ocurrió un error, favor de intentar más tarde.', 'error')
                 return
             }
-            console.log(response)
             name.value = response.name
-            school.value = response.school
             grade.value = response.grade
             letter.value = response.letter
         })
