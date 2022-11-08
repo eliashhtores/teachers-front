@@ -1,0 +1,85 @@
+@page {
+    size: auto;
+    margin: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.container {
+    position: relative;
+    color: black;
+}
+
+.name {
+    position: absolute;
+    top: 30%;
+    left: 25%;
+}
+
+.date {
+    position: absolute;
+    top: 22%;
+    right: 6%;
+}
+
+.age {
+    position: absolute;
+    top: 27%;
+    right: 30%;
+}
+
+.male {
+    position: absolute;
+    top: 36%;
+    left: 42%;
+}
+
+.female {
+    position: absolute;
+    top: 36%;
+    left: 37%;
+}
+
+.weight {
+    position: absolute;
+    top: 35%;
+    right: 27%;
+}
+
+.height {
+    position: absolute;
+    top: 35%;
+    right: 42%;
+}
+
+.blood_pressure {
+    position: absolute;
+    top: 31%;
+    left: 52%;
+}
+
+.allergies {
+    position: absolute;
+    top: 35%;
+    left: 12%;
+}
+
+.temperature {
+    position: absolute;
+    top: 35%;
+    right: 5%;
+}
+
+.medication {
+    position: absolute;
+    top: 45%;
+    left: 5%;
+}
+
+/* .required-field {
+    color: red !important;
+} */

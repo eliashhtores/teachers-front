@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <!-- site metas -->
+    <title>Evaluación</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- site icon -->
+    <link rel="icon" href="images/fevicon.png" type="image/png" />
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- site css -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- responsive css -->
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- select bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap-select.css" />
+    <!-- scrollbar css -->
+    <link rel="stylesheet" href="css/perfect-scrollbar.css" />
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/custom.css" />
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <link rel="stylesheet" href="css/simple-notify.min.css" />
+</head>
+
+<body class="dashboard dashboard_1">
+    <div class="full_container">
+        <div class="inner_container">
+            <!-- Sidebar  -->
+            <nav id="sidebar" class="ps active">
+                <div class="sidebar_blog_1">
+                    <div class="sidebar-header">
+                        <!-- <div class="logo_section">
+                            <a href="index.html"><img class="logo_icon img-responsive" src="images/logo/logo_icon.png"
+                                    alt="#" /></a>
+                        </div> -->
+                    </div>
+                    <div class="sidebar_user_info">
+                        <div class="icon_setting"></div>
+                        <div class="user_profle_side">
+                            <!-- <div class="user_img"><img class="img-responsive" src="images/layout_img/user_img.jpg" alt="#" /></div> -->
+                            <div class="user_info">
+                                <h6>Instrumento de observación</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar_blog_2">
+                    <h4>General</h4>
+                    <ul class="list-unstyled components">
+                        <li>
+                            <a href="main.html"><i class="fa fa-clipboard"></i> <span>Nueva
+                                    evaluación</span></a>
+                        </li>
+                        <li class="active">
+                            <a href="#dashboard" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
+                                    class="fa fa-user orange_color"></i> <span>Maestras</span></a>
+                            <ul class="collapse list-unstyled" id="dashboard">
+                                <li>
+                                    <a href="add_teacher.html">> <span>Agregar maestra</span></a>
+                                </li>
+                                <li>
+                                    <a href="teacher_catalog.html">> <span>Lista de maestras</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="evaluations.html"><i class="fa fa-file-text white_color"></i>
+                                <span>Evaluaciones</span></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+            <!-- end sidebar -->
+            <!-- right content -->
+            <div id="content">
+                <!-- topbar -->
+                <div class="topbar">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <div class="full">
+                            <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i
+                                    class="fa fa-bars"></i></button>
+                            <!-- <div class="logo_section">
+                                <a href="main.html"><img class="img-responsive" src="images/logo/logo.png"
+                                        alt="#" /></a>
+                            </div> -->
+                            <div class="right_topbar">
+                                <div class="icon_info">
+                                    <ul class="user_profile_dd">
+                                        <li>
+                                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                                <span class="name_user doctor_name"></span>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <!-- <a class="dropdown-item" href="profile.html">My Profile</a>
+                                                    <a class="dropdown-item" href="settings.html">Settings</a>
+                                                    <a class="dropdown-item" href="help.html">Help</a> -->
+                                                <a class="dropdown-item" href="#" id="exit"><span>Salir</span> <i
+                                                        class="fa fa-sign-out"></i></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <!-- end topbar -->
+                <!-- dashboard inner -->
+                <div class="midde_cont">
+                    <div class="container-fluid">
+                        <div class="row column_title">
+                            <div class="col-md-12">
+                                <div class="page_title">
+                                    <div class="center">
+                                        <h1>Supervisión Zona 08 preescolar</h1>
+                                    </div>
+                                    <div class="center mt-2">
+                                        <h2>Estado de Querétaro</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <aside class="lg-side">
+                            <div class="row column1">
+                                <div class="col-md-12">
+                                    <div class="full margin_bottom_30">
+
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-6">
+                                                <label for="school">Nombre del plantel educativo:</label>
+                                                <input type="text" class="form-control" required id="school"
+                                                    name="school" readonly />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="date">Fecha</label>
+                                                <input type="date" class="form-control" required id="date" name="date"
+                                                    readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col">
+                                                <label for="school_cycle">Ciclo escolar</label>
+                                                <input type="text" class="form-control" required id="school_cycle"
+                                                    name="school_cycle" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col">
+                                                <label for="name">Maestra observada</label>
+                                                <input type="text" class="form-control" required id="name" name="name"
+                                                    readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-6">
+                                                <label for="current_grade">Grado:</label>
+                                                <input type="text" class="form-control" required id="current_grade"
+                                                    name="current_grade" readonly />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="current_letter">Grupo:</label>
+                                                <input type="text" class="form-control" required id="current_letter"
+                                                    name="current_letter" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-6">
+                                                <label for="total_students">Total de alumnos en lista:</label>
+                                                <input type="number" min="1" class="students form-control" required
+                                                    id="total_students" name="total_students" readonly />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="attendance">Asistencia:</label>
+                                                <input type="number" min="1" class="students form-control" required
+                                                    id="attendance" name="attendance" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-3">
+                                                <label>Organización de la
+                                                    institución:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Completa" id="complete"
+                                                        name="institution_organization" class="custom-control-input"
+                                                        disabled>
+                                                    <label class="custom-control-label" for="complete">Completa</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Incompleta" id="incomplete"
+                                                        name="institution_organization" class="custom-control-input"
+                                                        disabled>
+                                                    <label class="custom-control-label" for="incomplete">Incompleta
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-3">
+                                                <label>Tipo de visita:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Ordinaria" id="ordinary"
+                                                        name="visit_type" class="custom-control-input" disabled>
+                                                    <label class="custom-control-label" for="ordinary">Ordinaria</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Extraordinaria" id="extraordinary"
+                                                        name="visit_type" class="custom-control-input" disabled>
+                                                    <label class="custom-control-label"
+                                                        for="extraordinary">Extraordinaria
+                                                    </label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="De seguimiento" id="following"
+                                                        name="visit_type" class="custom-control-input" disabled>
+                                                    <label class="custom-control-label" for="following">De
+                                                        seguimiento</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-5">
+                                            <label for="description">Descripción</label>
+                                            <textarea class="form-control" readonly id="description" name="description"
+                                                rows="4"></textarea>
+                                        </div>
+                                        <div class="form-group mt-5">
+                                            <label for="recommendations">Recomendaciones</label>
+                                            <textarea class="form-control" readonly id="recommendations"
+                                                name="recommendations" rows="4"></textarea>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-3">
+                                                <label>Alumnos involucrados:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Todos" id="all" name="students_involved"
+                                                        disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="all">Todos</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Más de la mitad" id="mth"
+                                                        name="students_involved" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="mth">Más de
+                                                        la mitad
+                                                    </label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="La mitad" id="half"
+                                                        name="students_involved" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="half">La
+                                                        mitad</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Menos de la mitad" id="lth"
+                                                        name="students_involved" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="lth">Menos de
+                                                        la mitad
+                                                    </label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="De ninguno" id="none"
+                                                        name="students_involved" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="none">De
+                                                        Ninguno</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-3">
+                                                <label>Los alumnos cumplen con el papel de:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Receptor" id="receptor"
+                                                        name="students_role" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="receptor">Receptor</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Emisor" id="transmitter"
+                                                        name="students_role" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="transmitter">Emisor
+                                                    </label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Constructor del aprendizaje" id="builder"
+                                                        name="students_role" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="builder">Constructor
+                                                        del aprendizaje</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-5">
+                                                <label>¿Se retoman los conocimientos previos de los niños?</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Sí" id="prior_knowledge_yes"
+                                                        name="prior_knowledge" disabled class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                        for="prior_knowledge_yes">Sí</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="No" id="prior_knowledge_no"
+                                                        name="prior_knowledge" disabled class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                        for="prior_knowledge_no">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-3">
+                                                <label>¿De qué forma?</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Plenaria" id="plenary"
+                                                        name="prior_knowledge_form" disabled
+                                                        class="custom-control-input">
+                                                    <label class="custom-control-label" for="plenary">Plenaria</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Grupo pequeño" id="small_group"
+                                                        name="prior_knowledge_form" disabled
+                                                        class="custom-control-input">
+                                                    <label class="custom-control-label" for="small_group">Grupo
+                                                        pequeño</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Exposición individual" id="exhibition"
+                                                        name="prior_knowledge_form" disabled
+                                                        class="custom-control-input">
+                                                    <label class="custom-control-label" for="exhibition">Exposición
+                                                        individual</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Lluvia de ideas" id="brainstorm"
+                                                        name="prior_knowledge_form" disabled
+                                                        class="custom-control-input">
+                                                    <label class="custom-control-label" for="brainstorm">Lluvia de
+                                                        ideas</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Otra" id="other"
+                                                        name="prior_knowledge_form" disabled
+                                                        class="custom-control-input">
+                                                    <label class="custom-control-label" for="other">Otra</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-5">
+                                                <label>¿Las actividades planeadas, propician el aprendizaje
+                                                    situado?</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Sí" id="situated_learning_yes"
+                                                        name="situated_learning" disabled class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                        for="situated_learning_yes">Sí</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="No" id="situated_learning_no"
+                                                        name="situated_learning" disabled class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                        for="situated_learning_no">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-3">
+                                                <label>Se trabaja:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Con material" id="material_yes"
+                                                        name="material" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="material_yes">Con
+                                                        material</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" value="Sin material" id="material_no"
+                                                        name="material" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="material_no">Sin
+                                                        material</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-12">
+                                                <label>Tipo de material: (clasificación Nerici)</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="full margin_bottom_30">
+                                                    <div class="table_section padding_infor_info">
+                                                        <div class="table-responsive-sm">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            <div class="center">
+                                                                                <div
+                                                                                    class="custom-control custom-radio custom-control-inline">
+                                                                                    <input type="radio" disabled
+                                                                                        value="permanent"
+                                                                                        name="material_type"
+                                                                                        id="permanent"
+                                                                                        class="custom-control-input">
+                                                                                    <label class="custom-control-label"
+                                                                                        for="permanent"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div class="center">
+                                                                                <div
+                                                                                    class="custom-control custom-radio custom-control-inline">
+                                                                                    <input type="radio" disabled
+                                                                                        value="informative"
+                                                                                        name="material_type"
+                                                                                        id="informative"
+                                                                                        class="custom-control-input">
+                                                                                    <label class="custom-control-label"
+                                                                                        for="informative"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div class="center">
+                                                                                <div
+                                                                                    class="custom-control custom-radio custom-control-inline">
+                                                                                    <input type="radio" disabled
+                                                                                        value="illustrative"
+                                                                                        name="material_type"
+                                                                                        id="illustrative"
+                                                                                        class="custom-control-input">
+                                                                                    <label class="custom-control-label"
+                                                                                        for="illustrative"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div class="center">
+                                                                                <div
+                                                                                    class="custom-control custom-radio custom-control-inline">
+                                                                                    <input type="radio" disabled
+                                                                                        value="experimental"
+                                                                                        name="material_type"
+                                                                                        id="experimental"
+                                                                                        class="custom-control-input">
+                                                                                    <label class="custom-control-label"
+                                                                                        for="experimental"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div class="center">
+                                                                                <div
+                                                                                    class="custom-control custom-radio custom-control-inline">
+                                                                                    <input type="radio" disabled
+                                                                                        value="technological"
+                                                                                        name="material_type"
+                                                                                        id="technological"
+                                                                                        class="custom-control-input">
+                                                                                    <label class="custom-control-label"
+                                                                                        for="technological"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Material permanente de trabajo:</td>
+                                                                        <td>Material informativo:</td>
+                                                                        <td>Material ilustrativo audiovisual:</td>
+                                                                        <td>Material experimental:</td>
+                                                                        <td>Material tecnológico:</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Tales como el tablero y los elementos
+                                                                            para escribir en él, videoproyectores,
+                                                                            cuadernos, reglas, compases,
+                                                                            computadores personales.</td>
+                                                                        <td>Mapas, libros, cuentos, diccionarios,
+                                                                            enciclopedias, revistas, periódicos,
+                                                                            etc.</td>
+                                                                        <td>Posters, videos, discos, etc.</td>
+                                                                        <td>Aparatos y materiales variados, que se
+                                                                            presten para la realización de pruebas o
+                                                                            experimentos que deriven en
+                                                                            aprendizajes.</td>
+                                                                        <td>Todos los medios electrónicos para la
+                                                                            creación de materiales didácticos. Las
+                                                                            herramientas o materiales, diccionarios
+                                                                            digitales, biografías interactivas,
+                                                                            bibliotecas digitales.</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row mt-3">
+                                            <div class="col-md-4">
+                                                <label>Observación general de las actividades realizadas:</label>
+                                            </div>
+                                            <div class="col-md-12" id="activities-table">
+                                                <div class="full margin_bottom_30">
+                                                    <div class="table_section padding_infor_info">
+                                                        <div class="table-responsive-sm">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th><strong>Actividad</strong></th>
+                                                                        <th><strong>Hora de inicio</strong></th>
+                                                                        <th><strong>Campos y áreas vinculadas a
+                                                                                esta</strong></th>
+                                                                        <th colspan="2">
+                                                                            <div class="center">
+                                                                                <strong>Ajustes razonables</strong>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th><strong>Hora de cierre</strong></th>
+                                                                        <th><strong>Vinculación a PEMC</strong></th>
+                                                                        <th><strong>Actividad que promueve el
+                                                                                trabajo
+                                                                                socioemocional</strong></th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th></th>
+                                                                        <th></th>
+                                                                        <th><span class="legend">Para un niño en
+                                                                                específico</span></th>
+                                                                        <th>Necesidades y estilos de aprendizaje del
+                                                                            grupo</th>
+                                                                        <th></th>
+                                                                        <th></th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="table-bordered table-responsive-sm"
+                                                                    id="activities_body">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-3">
+                                                <label>¿Existen tiempos muertos en el aula?</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" required value="Sí" id="dead_time_yes"
+                                                        name="dead_time" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="dead_time_yes">Sí</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" required value="No" id="dead_time_no"
+                                                        name="dead_time" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="dead_time_no">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-6">
+                                                <label>¿Es congruente el trabajo docente con el modelaje del
+                                                    aprendizaje?</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" required value="Sí" id="congruent_yes"
+                                                        name="congruent" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="congruent_yes">Sí</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" required value="No" id="congruent_no"
+                                                        name="congruent" disabled class="custom-control-input">
+                                                    <label class="custom-control-label" for="congruent_no">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row mt-5">
+                                            <div class="col-md-7">
+                                                <label>A partir de sus propuestas didácticas. ¿Promueve el
+                                                    aprendizaje situado con los alumnos?</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" disabled value="Sí"
+                                                        id="promotes_situated_learning_yes"
+                                                        name="promotes_situated_learning" class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                        for="promotes_situated_learning_yes">Sí</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" disabled value="No"
+                                                        id="promotes_situated_learning_no"
+                                                        name="promotes_situated_learning" class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                        for="promotes_situated_learning_no">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-5">
+                                            <label for="feedback">Retroalimentación favorable y respetuosa:</label>
+                                            <textarea class="form-control" disabled id="feedback" name="feedback"
+                                                rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            </aside>
+        </div>
+
+        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="addActivityModal" tabindex="-1"
+            aria-labelledby="addActivityModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class=" modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addActivityModalLabel">
+                            <span class="text-secondary">Agregar
+                                actividad</span>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-activity">
+                            <div class="form-group">
+                                <label for="activity-name">Actividad</label>
+                                <textarea class="form-control" id="activity-name" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="start-time">
+                                    Hora de inicio
+                                </label>
+                                <input class="form-control w-25" type="time" id="start-time" name="start-time">
+                            </div>
+                            <div class="form-group">
+                                <label for="linked-fields">Campos y áreas
+                                    vinculadas a esta</label>
+                                <textarea class="form-control" id="linked-fields" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="center">
+                                    <strong>Ajustes razonables</strong>
+                                </div>
+                                <label for="specific-kid">Para un niño en
+                                    específico</label>
+                                <textarea class="form-control" id="specific-kid" rows="2"></textarea>
+                                <label for="group-learning">Necesidades y
+                                    estilos de aprendizaje del grupo</label>
+                                <textarea class="form-control" id="group-learning" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="end-time">
+                                    Hora de cierre
+                                </label>
+                                <input class="form-control w-25" type="time" id="end-time" name="end-time">
+                            </div>
+                            <div class="form-group">
+                                <label for="pemc">Vinculación a PEMC</label>
+                                <textarea class="form-control" id="pemc" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="social-emotional-work">Actividad
+                                    que promueve el trabajo
+                                    socioemocional</label>
+                                <textarea class="form-control" id="social-emotional-work" rows="2"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <input type="submit" id="add-activity" class="btn btn-primary" value="Agregar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <!-- <div class="container-fluid">
+                            <div class="footer">
+                                <p>
+                                    Copyright © 2018 Designed by html.design. All rights reserved.<br /><br />
+                                    Distributed By: <a href="https://themewagon.com/">ThemeWagon</a>
+                                </p>
+                            </div>
+                        </div> -->
+    </div>
+    <!-- end dashboard inner -->
+    </div>
+    </div>
+    </div>
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- wow animation -->
+    <script src="js/animate.js"></script>
+    <!-- select country -->
+    <script src="js/bootstrap-select.js"></script>
+    <!-- owl carousel -->
+    <script src="js/owl.carousel.js"></script>
+    <!-- chart js -->
+    <script src="js/Chart.min.js"></script>
+    <script src="js/Chart.bundle.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/analyser.js"></script>
+    <!-- nice scrollbar -->
+    <script src="js/perfect-scrollbar.min.js"></script>
+    <!-- custom js -->
+    <script src="js/custom.js"></script>
+    <script src="js/easyhttp3.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/simple-notify.min.js"></script>
+    <script src="js/view_evaluation.js"></script>
+
+    <script>
+        var ps = new PerfectScrollbar('#sidebar')
+    </script>
+</body>
+
+</html>
