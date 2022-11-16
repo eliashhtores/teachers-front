@@ -28,14 +28,6 @@ const promotes_situated_learning = document.getElementsByName('promotes_situated
 const feedback = document.querySelector('#feedback')
 const activities_body = document.querySelector('#activities_body')
 
-const formatDate = (created_at) => {
-    const timestamp = new Date(created_at)
-    return [
-        timestamp.getFullYear(),
-        ('0' + timestamp.getDate()).slice(-2),
-        ('0' + (timestamp.getMonth() + 1)).slice(-2)
-    ].join('-')
-}
 
 const formatTime = (time) => {
     return time.split(":").slice(0, -1).join(':')

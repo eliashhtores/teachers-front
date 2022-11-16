@@ -85,6 +85,23 @@ const showLoader = () => {
     setTimeout(() => (table_wrapper.style.opacity = 1), 25)
 }
 
+const formatDate = (created_at) => {
+    const timestamp = new Date(created_at)
+    return [
+        timestamp.getFullYear(),
+        ('0' + (timestamp.getMonth() + 1)).slice(-2),
+        ('0' + timestamp.getDate()).slice(-2)
+    ].join('-')
+}
+
+const getCurrentDate = () => {
+    const date = new Date()
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return [year, day, month].join('-')
+}
+
 getSessionData()
 loadEventListeners()
 try {

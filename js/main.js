@@ -6,8 +6,16 @@ const submit_btn = document.querySelector('#submit-btn')
 const not_found = document.querySelector('#not-found')
 const director_id = getUserID()
 
+const currentDate = () => {
+    const date = new Date()
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return [year, month, day].join('-')
+}
+
 const getTeachers = () => {
-    http.get(`${server}/teacher/teacher/${name.value}/${director_id}`)
+    http.get(`${server}/evaluation/teacher/check/${name.value}/${director_id}`)
         .then((response) => {
             if (response.status === 404) {
                 not_found.classList.remove('d-none')
@@ -18,14 +26,24 @@ const getTeachers = () => {
             teachers.classList.remove('d-none')
             tbody.innerHTML = ''
             response.forEach((teacher) => {
+                const disabled = teacher.created_at == currentDate() ? 'disabled' : ''
+                const text = disabled == '' ? 'Crear evaluación' : 'Evaluación realizada'
                 tbody.innerHTML += `
                 <tr>
                     <td class="text-left">${teacher.name}</td>
                     <td>
-                        <a href="add_evaluation.html?teacher_id=${teacher.id}"><button type="button" class="btn orange_bg brown_color btn-xs">Crear evaluación <i class="fa fa-file-text brown_color-o"></i></button></a>
+                        <button id="${teacher.id}" ${disabled} type="button" class="btn orange_bg brown_color btn-xs evaluations">${text} <i class="fa fa-file-text brown_color-o"></i></button>
                     </td>
                 </tr>
                 `
+            })
+            const evaluations = document.querySelectorAll('.evaluations')
+            evaluations.forEach(evaluation => {
+                evaluation.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    window.location.replace(`add_evaluation.html?teacher_id=${e.target.id}`)
+                    return
+                })
             })
         })
         .catch((err) => {
@@ -35,15 +53,15 @@ const getTeachers = () => {
 }
 
 form.addEventListener('submit', (e) => {
+    e.preventDefault()
     if (name.value == '')
         return
     getTeachers()
-    e.preventDefault()
 })
 
 submit_btn.addEventListener('click', (e) => {
+    e.preventDefault()
     if (name.value == '')
         return
     getTeachers()
-    e.preventDefault()
 })

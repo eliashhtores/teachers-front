@@ -3,8 +3,6 @@ let server = 'http://localhost:3000'
 if (window.location.hostname !== '127.0.0.1')
     server = 'https://teachersback-production.up.railway.app'
 
-console.log(server)
-
 const http = new EasyHTTP()
 const username = document.querySelector('#username')
 const password = document.querySelector('#password')
@@ -17,7 +15,12 @@ const createSession = (data) => {
     storage.setItem('session', JSON.stringify(session))
 }
 
-const redirect = () => {
+const redirect = (superuser) => {
+    console.log(superuser)
+    if (superuser == 1) {
+        window.location.replace('admin.html')
+        return
+    }
     window.location.replace('main.html')
 }
 
@@ -51,7 +54,7 @@ form.addEventListener('submit', (e) => {
                 return
             }
             createSession(response)
-            redirect()
+            redirect(response.super)
         })
         .catch((err) => {
             createNotification('Ocurrió un error, favor de intentar más tarde.', 'error')

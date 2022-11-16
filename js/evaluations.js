@@ -17,6 +17,7 @@ const getEvaluations = () => {
             evaluations.classList.remove('d-none')
             tbody.innerHTML = ''
             response.forEach((evaluation) => {
+                evaluation.created_at = formatDate(evaluation.created_at)
                 tbody.innerHTML += `
                 <tr>
                     <td class="text-left"><a class="text-white" href="view_evaluation.html?id=${evaluation.id}">${evaluation.teacher_name}</a></td>

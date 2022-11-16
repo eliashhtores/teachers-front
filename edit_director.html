@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
     <!-- site metas -->
-    <title>Información de la maestra</title>
+    <title>Editar información</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -56,25 +56,17 @@
                 <div class="sidebar_blog_2">
                     <h4>General</h4>
                     <ul class="list-unstyled components">
-                        <li>
-                            <a href="main.html"><i class="fa fa-clipboard"></i> <span>Nueva
-                                    evaluación</span></a>
-                        </li>
-                        <li class="active">
+                        <li class="brown_color active">
                             <a href="#dashboard" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
-                                    class="fa fa-user orange_color"></i> <span>Maestras</span></a>
+                                    class="fa fa-users orange_color"></i> <span>Directoras</span></a>
                             <ul class="collapse list-unstyled" id="dashboard">
                                 <li>
-                                    <a href="add_teacher.html">> <span>Agregar maestra</span></a>
+                                    <a href="add_director.html">> <span>Agregar directora</span></a>
                                 </li>
                                 <li>
-                                    <a href="teacher_catalog.html">> <span>Lista de maestras</span></a>
+                                    <a href="admin.html">> <span>Lista de directoras</span></a>
                                 </li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="evaluations.html"><i class="fa fa-file-text white_color"></i>
-                                <span>Evaluaciones</span></a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o yellow_color"></i>
@@ -119,95 +111,60 @@
                 </div>
                 <!-- end topbar -->
                 <!-- dashboard inner -->
-
                 <div class="midde_cont">
                     <div class="container-fluid">
                         <div class="row column_title">
                             <div class="col-md-12">
                                 <div class="page_title">
-                                    <h2>Información de la maestra</h2>
+                                    <h2>Editar información</h2>
                                 </div>
                             </div>
                         </div>
-                        <!-- row -->
-                        <div class="row column1">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-8">
-                                <div class="white_shd full margin_bottom_30">
-                                    <div class="full graph_head">
-                                        <h3 id="teacher-name"></h3>
-                                    </div>
-                                    <div class="full price_table padding_infor_info">
-                                        <div class="row">
-                                            <!-- user profile section -->
-                                            <!-- profile image -->
-                                            <div class="col-lg-12">
-                                                <div class="full dis_flex center_text">
-                                                    <div class="profile_img"><img width="180" class="rounded-circle"
-                                                            src="images/layout_img/placeholder.jpg" alt="#" />
-                                                    </div>
-                                                    <div class="profile_contant">
-                                                        <div class="contact_inner">
-                                                            <p>Plantel educativo: <span id="school"></span>
-                                                            </p>
-                                                            <p>Grado: <span id="grade"></span>
-                                                            </p>
-                                                            <p>Grupo: <span id="letter"></span>
-                                                            </p>
-                                                            <p>Número de alumnos: <span id="total_students"></span>
-                                                            </p>
-                                                        </div>
-                                                    </div>
+
+                        <aside class="lg-side">
+                            <div class="row column1">
+                                <div class="col-md-12">
+                                    <div class="full margin_bottom_30">
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <label for="name">Nombre de la directora</label>
+                                                    <input type="text" class="form-control" id="name" name="name"
+                                                        required />
                                                 </div>
-
-
-                                                <div class="col-md-12">
-                                                    <div class="white_shd full margin_bottom_30">
-                                                        <div class="full graph_head">
-                                                            <div class="heading1 margin_0">
-                                                                <h2>Evaluaciones</h2>
-                                                            </div>
-                                                        </div>
-                                                        <div class="full inner_elements">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="tab_style3">
-                                                                        <div class="tabbar padding_infor_info">
-                                                                            <div class="nav flex-column nav-pills"
-                                                                                id="v-pills-tab" role="tablist"
-                                                                                aria-orientation="vertical">
-                                                                            </div>
-
-                                                                            <div class="tab-content"
-                                                                                id="v-pills-tabContent">
-
-
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
                                             </div>
-                                        </div>
+                                            <div class="form-row mt-3">
+                                                <div class="col">
+                                                    <label for="school">Plantel educativo</label>
+                                                    <input type="text" class="form-control" id="school" name="school"
+                                                        required />
+                                                </div>
+                                            </div>
+                                            <div class="center">
+                                                <input type="submit" value="Actualizar"
+                                                    class="btn btn-compose mt-3 w-25 text-white"></input>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                <div class="col-md-2"></div>
+                                <!-- end row -->
                             </div>
-                            <!-- end row -->
-                        </div>
+                        </aside>
                     </div>
-                    <!-- end dashboard inner -->
+
+                    <!-- footer -->
+                    <!-- <div class="container-fluid">
+                            <div class="footer">
+                                <p>
+                                    Copyright © 2018 Designed by html.design. All rights reserved.<br /><br />
+                                    Distributed By: <a href="https://themewagon.com/">ThemeWagon</a>
+                                </p>
+                            </div>
+                        </div> -->
                 </div>
+                <!-- end dashboard inner -->
             </div>
         </div>
-        <!-- end dashboard inner -->
-    </div>
-    </div>
     </div>
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
@@ -231,7 +188,7 @@
     <script src="js/easyhttp3.js"></script>
     <script src="js/app.js"></script>
     <script src="js/simple-notify.min.js"></script>
-    <script src="js/view_teacher.js"></script>
+    <script src="js/edit_director.js"></script>
     <script>
         var ps = new PerfectScrollbar('#sidebar')
     </script>
