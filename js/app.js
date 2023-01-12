@@ -1,7 +1,7 @@
 let server = 'http://localhost:3000'
 
 if (window.location.hostname !== '127.0.0.1')
-    server = 'https://teachersback-production.up.railway.app'
+    server = 'https://nice-lime-dalmatian-sari.cyclic.app/'
 
 const storage = localStorage
 const http = new EasyHTTP()
