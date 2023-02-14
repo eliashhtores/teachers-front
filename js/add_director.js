@@ -29,7 +29,8 @@ form.addEventListener('submit', (e) => {
     e.preventDefault()
     const formData = new FormData(form)
     let data = {}
-    for (let pair of formData.entries()) data[pair[0]] = pair[1]
+    for (let pair of formData.entries())
+        data[pair[0]] = pair[1]
     if (data.password != data.repassword) {
         passwords.forEach(password => {
             password.classList.add('is-invalid')

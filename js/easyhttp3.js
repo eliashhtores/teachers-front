@@ -21,7 +21,6 @@ class EasyHTTP {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                Accept: 'application/json',
                 'Content-type': 'application/json'
             },
             body: JSON.stringify(data)
@@ -30,14 +29,11 @@ class EasyHTTP {
         return resData
     }
 
-    // Make an HTTP PATCH Request
-    async patch(url, data) {
+    // Make an HTTP POST Request with File Transfer
+    async postFile(url, data) {
         const response = await fetch(url, {
-            method: 'PATCH',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            method: 'POST',
+            body: data
         })
         const resData = await response.json()
         return resData

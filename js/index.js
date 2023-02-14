@@ -16,7 +16,6 @@ const createSession = (data) => {
 }
 
 const redirect = (superuser) => {
-    console.log(superuser)
     if (superuser == 1) {
         window.location.replace('admin.html')
         return

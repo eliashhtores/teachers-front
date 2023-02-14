@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
     <!-- site metas -->
-    <title>Editar información</title>
+    <title>Gráficas</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -56,17 +56,26 @@
                 <div class="sidebar_blog_2">
                     <h4>General</h4>
                     <ul class="list-unstyled components">
-                        <li class="brown_color active">
+                        <li>
+                            <a href="main.html"><i class="fa fa-clipboard"></i> <span>Nueva
+                                    evaluación</span></a>
+                        </li>
+                        <li class="active">
                             <a href="#dashboard" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
-                                    class="fa fa-users orange_color"></i> <span>Directoras</span></a>
+                                    class="fa fa-user orange_color"></i> <span>Maestras</span></a>
                             <ul class="collapse list-unstyled" id="dashboard">
                                 <li>
-                                    <a href="add_director.html">> <span>Agregar directora</span></a>
+                                    <a href="add_teacher.html">> <span>Agregar maestra</span></a>
                                 </li>
                                 <li>
-                                    <a href="admin.html">> <span>Lista de directoras</span></a>
+                                    <a href="teacher_catalog.html">> <span>Lista de maestras</span></a>
                                 </li>
+
                             </ul>
+                        </li>
+                        <li>
+                            <a href="evaluations.html"><i class="fa fa-file-text white_color"></i>
+                                <span>Evaluaciones</span></a>
                         </li>
                         <li>
                             <a href="#charts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
@@ -80,6 +89,7 @@
                                 </li>
                             </ul>
                         </li>
+
                     </ul>
                 </div>
             </nav>
@@ -124,51 +134,73 @@
                         <div class="row column_title">
                             <div class="col-md-12">
                                 <div class="page_title">
-                                    <h2>Editar información</h2>
+                                    <h2>Gráficas por maestra</h2>
                                 </div>
                             </div>
                         </div>
 
                         <aside class="lg-side">
-                            <div class="row column1">
-                                <div class="col-md-12">
-                                    <div class="full margin_bottom_30">
-                                        <form>
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <label for="name">Nombre de la directora</label>
-                                                    <input type="text" class="form-control" id="name" name="name"
-                                                        required />
+                            <div class="row">
+                                <div class="col">
+                                    <div class="inbox-head">
+                                        <div class="input-append">
+                                            <form>
+                                                <div class="center">
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <input type="text" required id="name" name="name"
+                                                                class="sr-input" placeholder="Buscar maestra" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="date" required class="sr-input" name="date"
+                                                                id="date">
+                                                        </div>
+                                                        <div class="col">
+                                                            <button id="submit-btn" class="btn-search btn ml-2 btn-info"
+                                                                type="submit">
+                                                                <i class="fa fa-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-row mt-3">
-                                                <div class="col">
-                                                    <label for="school">Plantel educativo</label>
-                                                    <input type="text" class="form-control" id="school" name="school"
-                                                        required />
-                                                </div>
-                                            </div>
-                                            <div class="center">
-                                                <input type="submit" value="Actualizar"
-                                                    class="btn btn-compose mt-3 w-25 text-white"></input>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- end row -->
+                            </div>
+                            <div id="not-found" class="d-none">No se encontraron evaluaciones</div>
+                            <div class="row column1 d-none" id="teachers">
+                                <div class="white_shd full dark_bg  margin_bottom_30">
+                                    <div class="full graph_head">
+                                        <div class="heading1 margin_0">
+                                            <h2 class="brown_color">Maestras</h2>
+                                        </div>
+                                    </div>
+                                    <div class="full price_table padding_infor_info">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="table-responsive-sm">
+                                                    <table class="table projects">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th class="brown_color">Nombre</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </aside>
-                    </div>
 
-                    <!-- footer -->
-                    <!-- <div class="container-fluid">
-                            <div class="footer">
-                                <p>
-                                    Copyright © 2018 Designed by html.design. All rights reserved.<br /><br />
-                                    Distributed By: <a href="https://themewagon.com/">ThemeWagon</a>
-                                </p>
-                            </div>
-                        </div> -->
+                    </div>
                 </div>
                 <!-- end dashboard inner -->
             </div>
@@ -196,7 +228,7 @@
     <script src="js/easyhttp3.js"></script>
     <script src="js/app.js"></script>
     <script src="js/simple-notify.min.js"></script>
-    <script src="js/edit_director.js"></script>
+    <script src="js/teacher_charts.js"></script>
     <script>
         var ps = new PerfectScrollbar('#sidebar')
     </script>

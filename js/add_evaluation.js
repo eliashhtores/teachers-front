@@ -7,22 +7,41 @@ const totalStudents = document.querySelector('#total_students')
 const attendance = document.querySelector('#attendance')
 const students = document.querySelectorAll('.students')
 const submitButton = document.querySelector('#submit-button')
-const priorKnowledge = document.getElementsByName('prior_knowledge')
-const priorKnowledgeForm = document.getElementsByName('prior_knowledge_form')
-const material = document.getElementsByName('material')
-const materialType = document.getElementsByName('material_type')
 const addActivityModal = document.querySelector('#addActivityModal')
 const formActivity = document.querySelector('#form-activity')
 const activityName = document.querySelector('#activity-name')
 const startTime = document.querySelector('#start-time')
-const linkedFields = document.querySelector('#linked-fields')
-const specificKid = document.querySelector('#specific-kid')
-const groupLearning = document.querySelector('#group-learning')
 const endTime = document.querySelector('#end-time')
-const pemc = document.querySelector('#pemc')
-const socialEmotionalWork = document.querySelector('#social-emotional-work')
 const director_id = getUserID()
+const addBtn = document.querySelector('.add')
+const input = document.querySelector('#inp-group')
+const priorKnowledge = document.getElementsByName('prior_knowledge')
+const priorKnowledgeForm = document.getElementsByName('prior_knowledge_form')
+const material = document.getElementsByName('material')
+const materialType = document.getElementsByName('material_type')
+const activitiesTable = document.querySelector('#activities-table')
+const deadTime = document.getElementsByName('dead_time')
+const startTimeDead = document.querySelector('#start-time-dead')
+const endTimeDead = document.querySelector('#end-time-dead')
+const docentActivity = document.querySelector('#docent_activity')
 
+const linkedFieldsArr =
+{
+    "language": "Lenguaje y comunicación",
+    "mathematical": "Pensamiento matemático",
+    "exploration": "Exploración y comprensión del mundo natural y social",
+    "arts": "Artes",
+    "socioemotional": "Educación socioemocional",
+    "physical": "Educación física",
+}
+const materialTypesArr =
+{
+    "permanent": "Permanente de trabajo",
+    "informative": "Informativo",
+    "illustrative": "Ilustrativo audiovisual",
+    "experimental": "Experimental",
+    "technological": "Tecnológico",
+}
 
 const add_evaluation = (data) => {
     let activity = []
@@ -90,19 +109,122 @@ const getTeacherData = () => {
         })
 }
 
+addBtn.addEventListener('click', () => {
+    const kidName = document.createElement('input')
+    const adjustment = document.createElement('input')
+    const btn = document.createElement('a')
+
+    kidName.type = 'text'
+    kidName.classList = 'form-control my-1 kids'
+    kidName.placeholder = 'Nombre del niño'
+
+    adjustment.type = 'text'
+    adjustment.classList = 'form-control my-1 adjustments'
+    adjustment.placeholder = 'Ajuste'
+
+    btn.classList = 'delete my-1'
+    btn.innerHTML = '&times;'
+    btn.addEventListener('click', (e) => {
+        e.target.parentElement.remove()
+    })
+
+    const flex = document.createElement('div')
+    flex.className = 'input-row'
+    input.appendChild(flex)
+
+    flex.appendChild(kidName)
+    flex.appendChild(adjustment)
+    flex.appendChild(btn)
+})
+
 formActivity.addEventListener('submit', (e) => {
     e.preventDefault()
+
+    const modalBackdrops = document.getElementsByClassName('modal-backdrop')
+    const kids = document.querySelectorAll('.kids')
+    const adjustments = document.querySelectorAll('.adjustments')
+    const pemc = document.querySelector('input[name="pemc"]:checked')
+    const socialEmotionalWork = document.querySelector('input[name="social-emotional-work"]:checked')
+    const students_involved = document.querySelector('input[name="students_involved"]:checked')
+    const students_role = document.querySelector('input[name="students_role"]:checked')
+    const priorKnowledgeChecked = document.querySelector('input[name="prior_knowledge_form"]:checked')
+    const linkedFields = Array.from(document.querySelectorAll('[name="linked-fields"]:checked'))
+    const materialTypes = Array.from(document.querySelectorAll('[name="material_type"]:checked'))
+
+    let linkedFieldList = '', materialTypeList = '', kidsArray = [], adjustmentsArray = []
+    let materialRow = 'Sin material'
+    let priorKnowledgeRow = 'No'
+    let adjustmentsRow = ''
+
     if (startTime.value != '' && endTime.value != '' && startTime.value > endTime.value) {
         createNotification('La hora de inicio no puede ser mayor a la hora de cierre.', 'warning')
         startTime.value = 0
         startTime.focus()
         return
     }
+
+    for (const key in kids) {
+        if (Object.hasOwnProperty.call(kids, key)) {
+            const kid = kids[key]
+            kidsArray.push(kid.value)
+        }
+    }
+
+    for (const key in adjustments) {
+        if (Object.hasOwnProperty.call(adjustments, key)) {
+            const adjustment = adjustments[key]
+            adjustmentsArray.push(adjustment.value)
+        }
+    }
+
+    kidsArray.forEach((kid, i) => {
+        adjustmentsRow += `
+        <small><strong>${kidsArray[i]}</strong></small>
+        <br>
+        <small>${adjustmentsArray[i]}</small>
+        <hr class="divider">
+        `
+    })
+
+    if (linkedFields.length === 0) {
+        createNotification('Seleccione al menos un campo o área vinculada a la actividad.', 'warning')
+        return
+    }
+
+    linkedFields.map(linkedField => {
+        linkedFieldList += `
+            <li>${linkedFieldsArr[linkedField.value]}</li>
+        `
+    })
+
+    if (material[0].checked) {
+
+        if (materialTypes.length === 0) {
+            createNotification('Seleccione al menos un tipo de material.', 'warning')
+            return
+        }
+
+        materialRow = 'Con material'
+        materialTypes.map(materialType => {
+            materialTypeList += `
+                <li>${materialTypesArr[materialType.value]}</li>
+            `
+        })
+    }
+
+    if (priorKnowledge[0].checked) {
+        priorKnowledgeRow = 'Sí'
+        priorKnowledgeRow = `
+        ${priorKnowledgeRow}
+        <hr class="divider">
+        ${priorKnowledgeChecked.value}
+        `
+    }
+
     addActivityModal.classList.remove('show')
     addActivityModal.setAttribute('aria-hidden', 'true')
     addActivityModal.setAttribute('style', 'display: none')
 
-    const modalBackdrops = document.getElementsByClassName('modal-backdrop')
     document.body.removeChild(modalBackdrops[0])
 
     activitiesBody.innerHTML += `
@@ -114,16 +236,14 @@ formActivity.addEventListener('submit', (e) => {
             <small>${startTime.value}</small>
         </td>
         <td class="linked_fields">
-            <small>${linkedFields.value}</small>
+            <small>
+                <ul class="custom-list">
+                    ${linkedFieldList}
+                </ul>
+            </small>
         </td>
-        <td class="specific_kid">
-            <small>${specificKid.value}</small>
-        </td>
-        <td class="group_learning">
-            <small>${groupLearning.value}</small>
-        </td>
-        <td class="end_date">
-            <small>${endTime.value}</small>
+        <td class="reasonable_adjustments">
+            ${adjustmentsRow}
         </td>
         <td class="pemc">
             <small>${pemc.value}</small>
@@ -131,8 +251,34 @@ formActivity.addEventListener('submit', (e) => {
         <td class="social_emotional_work">
             <small>${socialEmotionalWork.value}</small>
         </td>
+        <td class="students_involved">
+            <small>${students_involved.value}</small>
+        </td>
+        <td class="students_role">
+            <small>${students_role.value}</small>
+        </td>
+        <td class="prior_knowledge">
+            <small>${priorKnowledgeRow}</small>
+        </td>
+        <td class="material">
+            <small>${materialRow}</small>
+        </td>
+        <td class="material_type">
+            <small>
+                <ul class="custom-list">
+                    ${materialTypeList}
+                </ul>
+            </small>
+        </td>
+        <td class="end_time">
+            <small>${endTime.value}</small>
+        </td>
     </tr>
     `
+
+    formActivity.reset()
+    activitiesTable.classList.remove('d-none')
+    createNotification('Actividad agregada.', 'success')
 })
 
 students.forEach(student => {
@@ -145,53 +291,69 @@ students.forEach(student => {
     })
 })
 
-priorKnowledge.forEach(priorKnowledgeElement => {
-    priorKnowledgeElement.addEventListener('click', (e) => {
-        priorKnowledgeForm.forEach(priorKnowledgeFormElement => {
-            if (e.target.value != 'No') {
-                priorKnowledgeFormElement.disabled = false
-                return
-            }
-            priorKnowledgeFormElement.disabled = true
-        })
-    })
-})
-
-material.forEach(material_element => {
-    material_element.addEventListener('click', (e) => {
-        materialType.forEach(materialType_element => {
-            if (e.target.value != 'Sin material') {
-                materialType_element.disabled = false
-                return
-            }
-            materialType_element.disabled = true
-        })
-    })
-})
-
 triggerModal.addEventListener('click', () => {
     activityName.value = ''
     startTime.value = ''
-    linkedFields.value = ''
-    specificKid.value = ''
-    groupLearning.value = ''
+    input.innerHTML = ''
+
+    priorKnowledge.forEach(priorKnowledgeElement => {
+        priorKnowledgeElement.addEventListener('click', (e) => {
+            priorKnowledgeForm.forEach(priorKnowledgeFormElement => {
+                if (e.target.value != 'No') {
+                    priorKnowledgeFormElement.disabled = false
+                    return
+                }
+                priorKnowledgeFormElement.disabled = true
+            })
+        })
+    })
+
+    material.forEach(material_element => {
+        material_element.addEventListener('click', (e) => {
+            materialType.forEach(materialType_element => {
+                if (e.target.value != 'Sin material') {
+                    materialType_element.disabled = false
+                    return
+                }
+                materialType_element.disabled = true
+            })
+        })
+    })
     endTime.value = ''
-    pemc.value = ''
-    socialEmotionalWork.value = ''
+})
+
+deadTime.forEach(deadTimeOption => {
+    deadTimeOption.addEventListener('click', (e) => {
+        if (e.target.value == 'Sí') {
+            startTimeDead.disabled = false
+            endTimeDead.disabled = false
+            docentActivity.disabled = false
+            return
+        }
+        startTimeDead.disabled = true
+        endTimeDead.disabled = true
+        docentActivity.disabled = true
+    })
 })
 
 form.addEventListener('submit', (e) => {
-    // children = document.querySelectorAll('activitiesBody .form-control')
-    // console.log(children)
-    // children.forEach(child => {
-    //     console.log(child.value)
-    // })
-
     e.preventDefault()
+
+    if (startTimeDead.value != '' && endTimeDead.value != '' && startTimeDead.value > endTimeDead.value) {
+        createNotification('La hora de inicio de tiempo muerto no puede ser mayor a la hora de fin.', 'warning')
+        startTimeDead.value = 0
+        startTimeDead.focus()
+        return
+    }
+
     const formData = new FormData(form)
     let data = {}
     for (let pair of formData.entries())
         data[pair[0]] = pair[1]
+
+    // if (data.dead_time == 'Sí') {
+    //     data.total_dead_time = ((endTimeDead.value.split(':')[0] * 60) + endTimeDead.value.split(':')[1]) - ((startTimeDead.value.split(':')[0] * 60) + startTimeDead.value.split(':')[1])
+    // }
 
     data.teacher_id = teacher_id
     data.director_id = getUserID()
