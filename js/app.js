@@ -102,6 +102,28 @@ const getCurrentDate = () => {
     return [year, month, day].join('-')
 }
 
+const getSchoolCycles = () => {
+    http.get(`${server}/evaluation/school_cycles/get/${director_id}`)
+        .then((response) => {
+            if (response.status === 404) {
+                not_found.classList.remove('d-none')
+                submit_btn.disabled = true
+                return
+            }
+            not_found.classList.add('d-none')
+            school_cycle.innerHTML = ''
+            response.forEach((cycle) => {
+                school_cycle.innerHTML += `
+            <option value="${cycle.school_cycle}">${cycle.school_cycle}</option>
+            `
+            })
+        })
+        .catch((err) => {
+            console.error(err)
+            createNotification('Ocurrió un error, favor de intentar más tarde.', 'error')
+        })
+}
+
 getSessionData()
 loadEventListeners()
 try {
