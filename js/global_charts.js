@@ -8,7 +8,6 @@ const director_id = getUserID()
 const getEvaluations = (school_cycle) => {
     http.get(`${server}/evaluation/school_cycle/${school_cycle}/${director_id}`)
         .then((response) => {
-            console.log(response)
             if (response.status === 404) {
                 not_found.classList.remove('d-none')
                 evaluations.classList.add('d-none')
@@ -17,8 +16,7 @@ const getEvaluations = (school_cycle) => {
             not_found.classList.add('d-none')
             evaluations.classList.remove('d-none')
             tbody.innerHTML = ''
-            response.forEach(() => {
-                tbody.innerHTML += `
+            tbody.innerHTML += `
                 <tr>
                     <td>
                         <a href="draw_global_chart.html?school_cycle=${school_cycle}&chart=global_time"><button type="button" class="btn brown_bg text-white btn-xs">Maestras con tiempos muertos <i class="fa fa-clock-o"></i></button></a>
@@ -34,7 +32,6 @@ const getEvaluations = (school_cycle) => {
                     </td>
                 </tr>
                 `
-            })
         })
         .catch((err) => {
             console.error(err)
