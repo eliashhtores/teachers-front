@@ -248,16 +248,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group mt-5">
-                                                <label for="description">Descripción</label>
-                                                <textarea class="form-control" required id="description"
-                                                    name="description" rows="4"></textarea>
-                                            </div>
-                                            <div class="form-group mt-5">
-                                                <label for="recommendations">Recomendaciones</label>
-                                                <textarea class="form-control" required id="recommendations"
-                                                    name="recommendations" rows="4"></textarea>
-                                            </div>
                                             <div class="form-row mt-3">
                                                 <div class="col-md-4">
                                                     <label>Observación general de las actividades realizadas:</label>
@@ -278,6 +268,7 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th><strong>Actividad</strong></th>
+                                                                            <th><strong>Descripción</strong></th>
                                                                             <th><strong>Hora de inicio</strong></th>
                                                                             <th><strong>Campos y áreas
                                                                                     vinculadas</strong></th>
@@ -295,6 +286,7 @@
                                                                             <th><strong>Se trabaja</strong>
                                                                             </th>
                                                                             <th><strong>Tipo de material</strong></th>
+                                                                            <th><strong>Recomendaciones</strong></th>
                                                                             <th><strong>Hora de cierre</strong></th>
                                                                         </tr>
                                                                     </thead>
@@ -306,8 +298,47 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
-                                            <div class="form-row mt-1">
+
+                                            <div class="form-row mt-3">
+                                                <div class="col-md-4">
+                                                    <label>Tiempos muertos entre actividades:</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <button type="button" class="btn green_bg text-white"
+                                                        data-toggle="modal" data-target="#addDeadTimeModal"
+                                                        id="trigger-modal">
+                                                        <strong>Agregar tiempo muerto</strong>
+                                                    </button>
+                                                </div>
+
+                                                <div class="col-md-12 d-none" id="dead-time-table">
+                                                    <div class="full margin_bottom_30">
+                                                        <div class="table_section padding_infor_info">
+                                                            <div class="table-responsive-sm">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th><strong>Hora de inicio del tiempo
+                                                                                    muerto</strong></th>
+                                                                            <th><strong>Hora de fin del tiempo
+                                                                                    muerto</strong></th>
+                                                                            <th><strong>Actividad que realiza el
+                                                                                    docente</strong></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody class="table-bordered table-responsive-sm"
+                                                                        id="dead-time-body">
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="form-row mt-1">
                                                 <div class="col-md-2">
                                                     <label>¿Existen tiempos muertos en el aula?</label>
                                                 </div>
@@ -348,7 +379,7 @@
                                                     <input class="form-control" type="text" disabled required
                                                         id="docent_activity" name="docent_activity">
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="form-row mt-5">
                                                 <div class="col-md-4">
                                                     <label>¿Es congruente el trabajo docente con el modelaje del
@@ -439,6 +470,11 @@
                             <div class="form-group">
                                 <label for="activity-name">Actividad:</label>
                                 <textarea class="form-control" id="activity-name" required rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Descripción</label>
+                                <textarea class="form-control" required id="description" name="description"
+                                    rows="2"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="start-time">
@@ -654,7 +690,7 @@
                                 <div class="form-group">
                                     <label>Tipo de material: (clasificación Nerici)</label>
                                 </div>
-                                <div class="full margin_bottom_30">
+                                <div class="full">
                                     <div class="table_section padding_infor_info">
                                         <div class="table-responsive-sm">
                                             <table class="table">
@@ -755,6 +791,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="recommendations">Recomendaciones</label>
+                                    <textarea class="form-control" required id="recommendations" name="recommendations"
+                                        rows="2"></textarea>
+                                </div>
+                                <div class="form-group">
                                     <label for="end-time">
                                         Hora de cierre
                                     </label>
@@ -774,15 +815,56 @@
             </div>
         </div>
 
-        <!-- footer -->
-        <!-- <div class="container-fluid">
-                            <div class="footer">
-                                <p>
-                                    Copyright © 2018 Designed by html.design. All rights reserved.<br /><br />
-                                    Distributed By: <a href="https://themewagon.com/">ThemeWagon</a>
-                                </p>
+        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="addDeadTimeModal" tabindex="-1"
+            aria-labelledby="addDeadTimeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class=" modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addDeadTimeModalLabel">
+                            <span class="brown_color">Agregar tiempo muerto</span>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-dead-time">
+                            <div class="form-row mt-3">
+                                <div class="form-group col">
+                                    <label for="dead-time-start">
+                                        Inicio:
+                                    </label>
+                                    <input class="form-control" type="time" required id="dead-time-start"
+                                        name="dead-time-start">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="dead-time-end">
+                                        Fin:
+                                    </label>
+                                    <input class="form-control" type="time" required id="dead-time-end"
+                                        name="dead-time-end">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="docent_activity">
+                                        ¿Qué actividad realiza el docente?
+                                    </label>
+                                    <input class="form-control" type="text" required id="docent_activity"
+                                        name="docent_activity">
+                                </div>
                             </div>
-                        </div> -->
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn red_bg brown_color"
+                                    data-dismiss="modal"><strong>Cerrar</strong></button>
+                                <input type="submit" class="btn blue1_bg test brown_color" value="Agregar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
     <!-- end dashboard inner -->
     </div>

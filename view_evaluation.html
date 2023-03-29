@@ -247,22 +247,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group mt-5">
-                                            <label for="description">Descripción</label>
-                                            <textarea class="form-control" readonly id="description" name="description"
-                                                rows="4"></textarea>
-                                        </div>
-                                        <div class="form-group mt-5">
-                                            <label for="recommendations">Recomendaciones</label>
-                                            <textarea class="form-control" readonly id="recommendations"
-                                                name="recommendations" rows="4"></textarea>
-                                        </div>
-
-                                        <div class="form-row mt-3">
+                                        <div class="form-row mt-3 d-none" id="activities-table">
                                             <div class="col-md-4">
                                                 <label>Observación general de las actividades realizadas:</label>
                                             </div>
-                                            <div class="col-md-12" id="activities-table">
+                                            <div class="col-md-12">
                                                 <div class="full margin_bottom_30">
                                                     <div class="table_section padding_infor_info">
                                                         <div class="table-responsive-sm">
@@ -270,6 +259,7 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th><strong>Actividad</strong></th>
+                                                                        <th><strong>Descripción</strong></th>
                                                                         <th><strong>Hora de inicio</strong></th>
                                                                         <th><strong>Campos y áreas vinculadas</strong>
                                                                         </th>
@@ -287,6 +277,7 @@
                                                                         <th><strong>Se trabaja</strong>
                                                                         </th>
                                                                         <th><strong>Tipo de material</strong></th>
+                                                                        <th><strong>Recomendaciones</strong></th>
                                                                         <th><strong>Hora de cierre</strong></th>
                                                                     </tr>
                                                                 </thead>
@@ -300,46 +291,34 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-row mt-1">
-                                            <div class="col-md-2">
-                                                <label>¿Existen tiempos muertos en el aula?</label>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" required value="Sí" id="dead_time_yes"
-                                                        name="dead_time" disabled class="custom-control-input">
-                                                    <label class="custom-control-label" for="dead_time_yes">Sí</label>
+                                        <div class="form-row d-none" id="dead-times-table">
+                                            <label>Tiempos muertos entre actividades:</label>
+                                            <div class="col-md-12">
+                                                <div class="full margin_bottom_30">
+                                                    <div class="table_section padding_infor_info">
+                                                        <div class="table-responsive-sm">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th><strong>Hora de inicio del tiempo
+                                                                                muerto</strong></th>
+                                                                        <th><strong>Hora de fin del tiempo
+                                                                                muerto</strong></th>
+                                                                        <th><strong>Actividad que realiza el
+                                                                                docente</strong></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="table-bordered table-responsive-sm"
+                                                                    id="dead_times_body">
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" required value="No" id="dead_time_no"
-                                                        name="dead_time" disabled class="custom-control-input">
-                                                    <label class="custom-control-label" for="dead_time_no">No</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row mt-3">
-                                            <div class="form-group col-md-3">
-                                                <label for="start-time-dead">
-                                                    Inicio:
-                                                </label>
-                                                <input class="form-control" type="time" disabled id="start-time-dead">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="end-time-dead">
-                                                    Fin:
-                                                </label>
-                                                <input class="form-control" type="time" disabled id="end-time-dead">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="docent_activity">
-                                                    ¿Qué actividad realiza el docente?
-                                                </label>
-                                                <input class="form-control" type="text" disabled id="docent_activity"
-                                                    name="docent_activity">
                                             </div>
                                         </div>
 
-                                        <div class="form-row mt-5">
+                                        <div class="form-row">
                                             <div class="col-md-4">
                                                 <label>¿Es congruente el trabajo docente con el modelaje del
                                                     aprendizaje?</label>

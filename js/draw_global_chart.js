@@ -20,19 +20,18 @@ const drawChart = (ctx, data, type) => {
 
     if (chart === 'global_time') {
         data[0] === undefined ? data[0] = 0 : data[0]
-        data[1] === undefined ? data[1] = 0 : data[1]
 
         config = {
             type: type,
             data: {
                 datasets: [
                     {
-                        label: 'Maestras con tiempos muertos',
-                        data: [data[0].count, data[1].count],
+                        label: 'Maestras con tiempos muertos registrados',
+                        data: [data[0].count, data[0].total - data[0].count],
                         backgroundColor: ['rgba(233, 30, 99, 0.5)', 'rgba(33, 150, 243, 0.5)'],
                     },
                 ],
-                labels: ['Maestras con tiempos muertos', 'Maestras sin tiempos muertos'],
+                labels: ['Maestras con tiempos muertos registrados', 'Maestras sin tiempos muertos registrados'],
             },
             options: {
                 responsive: true,
@@ -184,7 +183,7 @@ const setChartFormat = (chart) => {
 
     switch (chart) {
         case 'global_time':
-            chartType = 'Maestras con tiempos muertos'
+            chartType = 'Maestras con tiempos muertos registrados'
             break
         case 'global_students':
             chartType = 'Alumnos involucrados'

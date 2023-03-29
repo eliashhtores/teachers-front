@@ -3,14 +3,18 @@ const teacher_id = url.searchParams.get('teacher_id')
 const form = document.querySelector('#main-form')
 const triggerModal = document.querySelector('#trigger-modal')
 const activitiesBody = document.querySelector('#activities_body')
+const deadTimesBody = document.querySelector('#dead-time-body')
 const totalStudents = document.querySelector('#total_students')
 const attendance = document.querySelector('#attendance')
 const students = document.querySelectorAll('.students')
 const submitButton = document.querySelector('#submit-button')
 const addActivityModal = document.querySelector('#addActivityModal')
+const addDeadTimeModal = document.querySelector('#addDeadTimeModal')
 const formActivity = document.querySelector('#form-activity')
 const activityName = document.querySelector('#activity-name')
 const startTime = document.querySelector('#start-time')
+const description = document.querySelector('#description')
+const recommendations = document.querySelector('#recommendations')
 const endTime = document.querySelector('#end-time')
 const director_id = getUserID()
 const addBtn = document.querySelector('.add')
@@ -20,10 +24,8 @@ const priorKnowledgeForm = document.getElementsByName('prior_knowledge_form')
 const material = document.getElementsByName('material')
 const materialType = document.getElementsByName('material_type')
 const activitiesTable = document.querySelector('#activities-table')
-const deadTime = document.getElementsByName('dead_time')
-const startTimeDead = document.querySelector('#start-time-dead')
-const endTimeDead = document.querySelector('#end-time-dead')
-const docentActivity = document.querySelector('#docent_activity')
+const formDeadTime = document.querySelector('#form-dead-time')
+const deadTimeTable = document.querySelector('#dead-time-table')
 
 const linkedFieldsArr =
 {
@@ -45,7 +47,9 @@ const materialTypesArr =
 
 const add_evaluation = (data) => {
     let activity = []
+    let deadTime = []
     data.activities = []
+    data.deadTimes = []
 
     for (let row of activitiesBody.rows) {
         for (let cell of row.cells) {
@@ -56,6 +60,15 @@ const add_evaluation = (data) => {
         data.activities.push(activity)
     }
 
+    for (let row of deadTimesBody.rows) {
+        for (let cell of row.cells) {
+            const value = cell.innerText
+            const field = cell.classList
+            deadTime = { ...deadTime, [field]: value }
+        }
+        data.deadTimes.push(deadTime)
+    }
+
     submitButton.disabled = true
     http.post(`${server}/evaluation`, data)
         .then((response) => {
@@ -63,6 +76,8 @@ const add_evaluation = (data) => {
                 createNotification('Evaluación guardada correctamente.', 'success')
                 clearForm()
                 activitiesBody.innerHTML = ''
+                deadTimesBody.innerHTML = ''
+
                 // window.setTimeout(function () {
                 //     window.location.replace('save_evaluation.html')
                 // }, 1500)
@@ -226,11 +241,13 @@ formActivity.addEventListener('submit', (e) => {
     addActivityModal.setAttribute('style', 'display: none')
 
     document.body.removeChild(modalBackdrops[0])
-
     activitiesBody.innerHTML += `
     <tr>
         <td class="activity_name">
             <small>${activityName.value}</small>
+        </td>
+        <td class="description">
+            <small>${description.value}</small>
         </td>
         <td class="start_time">
             <small>${startTime.value}</small>
@@ -270,6 +287,9 @@ formActivity.addEventListener('submit', (e) => {
                 </ul>
             </small>
         </td>
+        <td class="recommendations">
+            <small>${recommendations.value}</small>
+        </td>
         <td class="end_time">
             <small>${endTime.value}</small>
         </td>
@@ -279,6 +299,47 @@ formActivity.addEventListener('submit', (e) => {
     formActivity.reset()
     activitiesTable.classList.remove('d-none')
     createNotification('Actividad agregada.', 'success')
+})
+
+
+formDeadTime.addEventListener('submit', e => {
+    const deadTimeStart = document.querySelector('#dead-time-start')
+    const deadTimeEnd = document.querySelector('#dead-time-end')
+    const docentActivity = document.querySelector('#docent_activity')
+    const modalBackdrops = document.getElementsByClassName('modal-backdrop')
+
+    e.preventDefault()
+
+    if (deadTimeStart.value != '' && deadTimeEnd.value != '' && deadTimeStart.value > deadTimeEnd.value) {
+        createNotification('La hora de inicio de tiempo muerto no puede ser mayor a la hora de fin.', 'warning')
+        deadTimeStart.value = 0
+        deadTimeStart.focus()
+        return
+    }
+
+    addDeadTimeModal.classList.remove('show')
+    addDeadTimeModal.setAttribute('aria-hidden', 'true')
+    addDeadTimeModal.setAttribute('style', 'display: none')
+
+
+    document.body.removeChild(modalBackdrops[0])
+    deadTimesBody.innerHTML += `
+    <tr>
+        <td class="start">
+            <small>${deadTimeStart.value}</small>
+        </td>
+        <td class="end">
+            <small>${deadTimeEnd.value}</small>
+        </td>
+        <td class="docent_activity">
+            <small>${docentActivity.value}</small>
+        </td>
+    </tr>
+    `
+
+    formDeadTime.reset()
+    deadTimeTable.classList.remove('d-none')
+    createNotification('Tiempo muerto agregado.', 'success')
 })
 
 students.forEach(student => {
@@ -293,6 +354,8 @@ students.forEach(student => {
 
 triggerModal.addEventListener('click', () => {
     activityName.value = ''
+    description.value = ''
+    recommendations.value = ''
     startTime.value = ''
     input.innerHTML = ''
 
@@ -322,29 +385,8 @@ triggerModal.addEventListener('click', () => {
     endTime.value = ''
 })
 
-deadTime.forEach(deadTimeOption => {
-    deadTimeOption.addEventListener('click', (e) => {
-        if (e.target.value == 'Sí') {
-            startTimeDead.disabled = false
-            endTimeDead.disabled = false
-            docentActivity.disabled = false
-            return
-        }
-        startTimeDead.disabled = true
-        endTimeDead.disabled = true
-        docentActivity.disabled = true
-    })
-})
-
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-
-    if (startTimeDead.value != '' && endTimeDead.value != '' && startTimeDead.value > endTimeDead.value) {
-        createNotification('La hora de inicio de tiempo muerto no puede ser mayor a la hora de fin.', 'warning')
-        startTimeDead.value = 0
-        startTimeDead.focus()
-        return
-    }
 
     const formData = new FormData(form)
     let data = {}
@@ -352,7 +394,7 @@ form.addEventListener('submit', (e) => {
         data[pair[0]] = pair[1]
 
     // if (data.dead_time == 'Sí') {
-    //     data.total_dead_time = ((endTimeDead.value.split(':')[0] * 60) + endTimeDead.value.split(':')[1]) - ((startTimeDead.value.split(':')[0] * 60) + startTimeDead.value.split(':')[1])
+    //     data.total_dead_time = ((deadTimeEnd.value.split(':')[0] * 60) + deadTimeEnd.value.split(':')[1]) - ((deadTimeStart.value.split(':')[0] * 60) + deadTimeStart.value.split(':')[1])
     // }
 
     data.teacher_id = teacher_id

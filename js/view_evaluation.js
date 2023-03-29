@@ -13,8 +13,6 @@ const complete = document.querySelector('#complete')
 const incomplete = document.querySelector('#incomplete')
 const institution_organization = document.getElementsByName('institution_organization')
 const visit_type = document.getElementsByName('visit_type')
-const description = document.querySelector('#description')
-const recommendations = document.querySelector('#recommendations')
 const students_involved = document.getElementsByName('students_involved')
 const students_role = document.getElementsByName('students_role')
 const prior_knowledge = document.getElementsByName('prior_knowledge')
@@ -22,14 +20,11 @@ const prior_knowledge_form = document.getElementsByName('prior_knowledge_form')
 const situated_learning = document.getElementsByName('situated_learning')
 const material = document.getElementsByName('material')
 const material_type = document.getElementsByName('material_type')
-const deadTime = document.getElementsByName('dead_time')
-const startTimeDead = document.querySelector('#start-time-dead')
-const endTimeDead = document.querySelector('#end-time-dead')
-const docentActivity = document.querySelector('#docent_activity')
 const congruent = document.getElementsByName('congruent')
 const promotesSituatedLearning = document.getElementsByName('promotes_situated_learning')
 const feedback = document.querySelector('#feedback')
-const activities_body = document.querySelector('#activities_body')
+const activitiesBody = document.querySelector('#activities_body')
+const deadTimesBody = document.querySelector('#dead_times_body')
 
 const formatTime = (time) => {
     return time.split(":").slice(0, -1).join(':')
@@ -47,7 +42,13 @@ const checkRadio = (radioButtons, responseValue) => {
 const getActivities = () => {
     http.get(`${server}/activity/evaluation/${id}`)
         .then((response) => {
-            activities_body.innerHTML = ''
+            activitiesBody.innerHTML = ''
+
+            if (response.status === 404)
+                return
+
+            const activitiesTable = document.querySelector('#activities-table')
+            activitiesTable.classList.remove('d-none')
 
             response.forEach(async (activity) => {
                 const linkedFields = await getLinkedFields(activity.id)
@@ -57,37 +58,46 @@ const getActivities = () => {
                 let reasonableAdjustmentsRow = ''
                 let materialTypesRow = ''
 
-                linkedFields.forEach(linkedField => {
-                    linkedFieldsRow += `
+                if (linkedFields.length > 0) {
+                    linkedFields.forEach(linkedField => {
+                        linkedFieldsRow += `
                         <li>
                             ${linkedField.field}
                         </li>
                     `
-                })
+                    })
+                }
 
-                reasonableAdjustments.forEach(reasonableAdjustment => {
-                    reasonableAdjustmentsRow += `
+                if (reasonableAdjustments.length > 0) {
+                    reasonableAdjustments.forEach(reasonableAdjustment => {
+                        reasonableAdjustmentsRow += `
                         <strong>${reasonableAdjustment.kid}</strong>
                         <br>
                         ${reasonableAdjustment.adjustment}
                         <hr class="divider">
                     `
-                })
+                    })
+                }
 
-                materialTypes.forEach(materialType => {
-                    materialTypesRow += `
+                if (materialTypes.length > 0) {
+                    materialTypes.forEach(materialType => {
+                        materialTypesRow += `
                         <li>
                             ${materialType.material}
                         </li>
                     `
-                })
+                    })
+                }
 
                 activity.start_time = formatTime(activity.start_time)
                 activity.end_time = formatTime(activity.end_time)
-                activities_body.innerHTML += `
+                activitiesBody.innerHTML += `
                 <tr>
                     <td class="activity_name">
                         <small>${activity.activity_name}</small>
+                    </td>
+                    <td class="activity_description">
+                        <small>${activity.description}</small>
                     </td>
                     <td class="start_time">
                         <small>${activity.start_time}</small>
@@ -127,9 +137,46 @@ const getActivities = () => {
                         </ul>
                         </small>
                     </td>
-
+                    <td class="activity_name">
+                        <small>${activity.recommendations}</small>
+                    </td>
                     <td class="end_time">
                         <small>${activity.end_time}</small>
+                    </td>
+                </tr>
+                `
+            })
+        })
+        .catch((err) => {
+            console.error(err)
+            createNotification('Ocurrió un error, favor de intentar más tarde.', 'error')
+        })
+}
+
+const getDeadTimes = () => {
+    http.get(`${server}/evaluation/dead_time/${id}`)
+        .then((response) => {
+            deadTimesBody.innerHTML = ''
+
+            if (response.status === 404)
+                return
+
+            const deadTimesTable = document.querySelector('#dead-times-table')
+            deadTimesTable.classList.remove('d-none')
+
+            response.forEach(async (deadTime) => {
+                deadTime.start = formatTime(deadTime.start)
+                deadTime.end = formatTime(deadTime.end)
+                deadTimesBody.innerHTML += `
+                <tr>
+                    <td class="start">
+                        <small>${deadTime.start}</small>
+                    </td>
+                    <td class="end">
+                        <small>${deadTime.end}</small>
+                    </td>
+                    <td class="docent_activity">
+                        <small>${deadTime.docent_activity}</small>
                     </td>
                 </tr>
                 `
@@ -188,8 +235,6 @@ const getEvaluation = () => {
             attendance.value = response.attendance
             checkRadio(institution_organization, response.institution_organization)
             checkRadio(visit_type, response.visit_type)
-            description.value = response.description
-            recommendations.value = response.recommendations
             checkRadio(students_involved, response.students_involved)
             checkRadio(students_role, response.students_role)
             checkRadio(prior_knowledge, response.prior_knowledge)
@@ -197,14 +242,11 @@ const getEvaluation = () => {
             checkRadio(situated_learning, response.situated_learning)
             checkRadio(material, response.material)
             checkRadio(material_type, response.material_type)
-            checkRadio(deadTime, response.dead_time)
-            startTimeDead.value = response.start_time_dead
-            endTimeDead.value = response.end_time_dead
-            docentActivity.value = response.docent_activity
             checkRadio(congruent, response.congruent)
             checkRadio(promotesSituatedLearning, response.promotes_situated_learning)
             feedback.value = response.feedback
             getActivities()
+            getDeadTimes()
         })
         .catch((err) => {
             console.error(err)

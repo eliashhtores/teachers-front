@@ -143,7 +143,7 @@ const getEvaluationData = (chart) => {
                 return
             }
 
-            if (response.status == 404 || response[0].total == 0) {
+            if (response.status == 404 || response[0].total == 0 || response[0].total == null) {
                 createNotification('Sin datos en la fecha seleccionada.', 'warning')
                 if (myChart !== undefined)
                     myChart.destroy()
@@ -151,8 +151,7 @@ const getEvaluationData = (chart) => {
             }
 
             if (chart === 'time') {
-                const total_dead_time = (parseInt((response[0].end_time_dead.split(':')[0] * 60)) + parseInt((response[0].end_time_dead.split(':')[1]))) - (parseInt((response[0].start_time_dead.split(':')[0] * 60)) + parseInt((response[0].start_time_dead.split(':')[1])))
-                drawChart(ctx, total_dead_time, type)
+                drawChart(ctx, response[0].total, type)
                 return
             }
             drawChart(ctx, response, type)
