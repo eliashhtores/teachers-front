@@ -1,33 +1,33 @@
 const url = new URL(window.location.href)
-const id = url.searchParams.get('id')
-const school = document.querySelector('#school')
-const teacher_name = document.querySelector('#teacher_name')
-const date = document.querySelector('#date')
-const school_cycle = document.querySelector('#school_cycle')
-const name = document.querySelector('#name')
-const current_grade = document.querySelector('#current_grade')
-const current_letter = document.querySelector('#current_letter')
-const total_students = document.querySelector('#total_students')
-const attendance = document.querySelector('#attendance')
-const complete = document.querySelector('#complete')
-const incomplete = document.querySelector('#incomplete')
-const institution_organization = document.getElementsByName('institution_organization')
-const visit_type = document.getElementsByName('visit_type')
-const students_involved = document.getElementsByName('students_involved')
-const students_role = document.getElementsByName('students_role')
-const prior_knowledge = document.getElementsByName('prior_knowledge')
-const prior_knowledge_form = document.getElementsByName('prior_knowledge_form')
-const situated_learning = document.getElementsByName('situated_learning')
-const material = document.getElementsByName('material')
-const material_type = document.getElementsByName('material_type')
-const congruent = document.getElementsByName('congruent')
-const promotesSituatedLearning = document.getElementsByName('promotes_situated_learning')
-const feedback = document.querySelector('#feedback')
-const activitiesBody = document.querySelector('#activities_body')
-const deadTimesBody = document.querySelector('#dead_times_body')
+const id = url.searchParams.get("id")
+const school = document.querySelector("#school")
+const teacher_name = document.querySelector("#teacher_name")
+const date = document.querySelector("#date")
+const school_cycle = document.querySelector("#school_cycle")
+const name = document.querySelector("#name")
+const current_grade = document.querySelector("#current_grade")
+const current_letter = document.querySelector("#current_letter")
+const total_students = document.querySelector("#total_students")
+const attendance = document.querySelector("#attendance")
+const complete = document.querySelector("#complete")
+const incomplete = document.querySelector("#incomplete")
+const institution_organization = document.getElementsByName("institution_organization")
+const visit_type = document.getElementsByName("visit_type")
+const students_involved = document.getElementsByName("students_involved")
+const students_role = document.getElementsByName("students_role")
+const prior_knowledge = document.getElementsByName("prior_knowledge")
+const prior_knowledge_form = document.getElementsByName("prior_knowledge_form")
+const situated_learning = document.getElementsByName("situated_learning")
+const material = document.getElementsByName("material")
+const material_type = document.getElementsByName("material_type")
+const congruent = document.getElementsByName("congruent")
+const promotesSituatedLearning = document.getElementsByName("promotes_situated_learning")
+const feedback = document.querySelector("#feedback")
+const activitiesBody = document.querySelector("#activities_body")
+const deadTimesBody = document.querySelector("#dead_times_body")
 
 const formatTime = (time) => {
-    return time.split(":").slice(0, -1).join(':')
+    return time.split(":").slice(0, -1).join(":")
 }
 
 const checkRadio = (radioButtons, responseValue) => {
@@ -42,24 +42,23 @@ const checkRadio = (radioButtons, responseValue) => {
 const getActivities = () => {
     http.get(`${server}/activity/evaluation/${id}`)
         .then((response) => {
-            activitiesBody.innerHTML = ''
+            activitiesBody.innerHTML = ""
 
-            if (response.status === 404)
-                return
+            if (response.status === 404) return
 
-            const activitiesTable = document.querySelector('#activities-table')
-            activitiesTable.classList.remove('d-none')
+            const activitiesTable = document.querySelector("#activities-table")
+            activitiesTable.classList.remove("d-none")
 
             response.forEach(async (activity) => {
-                const linkedFields = await getLinkedFields(activity.id)
-                const reasonableAdjustments = await getReasonableAdjustments(activity.id)
-                const materialTypes = await getMaterialTypes(activity.id)
-                let linkedFieldsRow = ''
-                let reasonableAdjustmentsRow = ''
-                let materialTypesRow = ''
+                const linkedFields = getLinkedFields(activity.id)
+                const reasonableAdjustments = getReasonableAdjustments(activity.id)
+                const materialTypes = getMaterialTypes(activity.id)
+                let linkedFieldsRow = ""
+                let reasonableAdjustmentsRow = ""
+                let materialTypesRow = ""
 
                 if (linkedFields.length > 0) {
-                    linkedFields.forEach(linkedField => {
+                    linkedFields.forEach((linkedField) => {
                         linkedFieldsRow += `
                         <li>
                             ${linkedField.field}
@@ -69,7 +68,7 @@ const getActivities = () => {
                 }
 
                 if (reasonableAdjustments.length > 0) {
-                    reasonableAdjustments.forEach(reasonableAdjustment => {
+                    reasonableAdjustments.forEach((reasonableAdjustment) => {
                         reasonableAdjustmentsRow += `
                         <strong>${reasonableAdjustment.kid}</strong>
                         <br>
@@ -80,7 +79,7 @@ const getActivities = () => {
                 }
 
                 if (materialTypes.length > 0) {
-                    materialTypes.forEach(materialType => {
+                    materialTypes.forEach((materialType) => {
                         materialTypesRow += `
                         <li>
                             ${materialType.material}
@@ -125,7 +124,7 @@ const getActivities = () => {
                         <small>${activity.students_role}</small>
                     </td>
                     <td class="prior_knowledge">
-                        <small>${activity.prior_knowledge.replace('\n', '<br>')}</small>
+                        <small>${activity.prior_knowledge.replace("\n", "<br>")}</small>
                     </td>
                     <td class="material">
                         <small>${activity.material}</small>
@@ -149,20 +148,19 @@ const getActivities = () => {
         })
         .catch((err) => {
             console.error(err)
-            createNotification('Ocurrió un error, favor de intentar más tarde.', 'error')
+            createNotification("Ocurrió un error, favor de intentar más tarde.", "error")
         })
 }
 
 const getDeadTimes = () => {
     http.get(`${server}/evaluation/dead_time/${id}`)
         .then((response) => {
-            deadTimesBody.innerHTML = ''
+            deadTimesBody.innerHTML = ""
 
-            if (response.status === 404)
-                return
+            if (response.status === 404) return
 
-            const deadTimesTable = document.querySelector('#dead-times-table')
-            deadTimesTable.classList.remove('d-none')
+            const deadTimesTable = document.querySelector("#dead-times-table")
+            deadTimesTable.classList.remove("d-none")
 
             response.forEach(async (deadTime) => {
                 deadTime.start = formatTime(deadTime.start)
@@ -184,7 +182,7 @@ const getDeadTimes = () => {
         })
         .catch((err) => {
             console.error(err)
-            createNotification('Ocurrió un error, favor de intentar más tarde.', 'error')
+            createNotification("Ocurrió un error, favor de intentar más tarde.", "error")
         })
 }
 
@@ -195,7 +193,7 @@ async function getLinkedFields(activity_id) {
         return json
     } catch (error) {
         console.error(error)
-        createNotification('Ocurrió un error, favor de intentar más tarde.', 'error')
+        createNotification("Ocurrió un error, favor de intentar más tarde.", "error")
     }
 }
 
@@ -206,7 +204,7 @@ async function getReasonableAdjustments(activity_id) {
         return json
     } catch (error) {
         console.error(error)
-        createNotification('Ocurrió un error, favor de intentar más tarde.', 'error')
+        createNotification("Ocurrió un error, favor de intentar más tarde.", "error")
     }
 }
 
@@ -217,10 +215,9 @@ async function getMaterialTypes(activity_id) {
         return json
     } catch (error) {
         console.error(error)
-        createNotification('Ocurrió un error, favor de intentar más tarde.', 'error')
+        createNotification("Ocurrió un error, favor de intentar más tarde.", "error")
     }
 }
-
 
 const getEvaluation = () => {
     http.get(`${server}/evaluation/${id}`)
@@ -250,7 +247,7 @@ const getEvaluation = () => {
         })
         .catch((err) => {
             console.error(err)
-            createNotification('Ocurrió un error, favor de intentar más tarde.', 'error')
+            createNotification("Ocurrió un error, favor de intentar más tarde.", "error")
         })
 }
 
