@@ -1,6 +1,6 @@
 let server = "http://localhost:3000"
 
-if (window.location.hostname !== "127.0.0.1") server = "https://teachers-back-n7pz.onrender.com"
+if (window.location.hostname !== "127.0.0.1") server = "https://teachers-back.vercel.app"
 
 const storage = localStorage
 const http = new EasyHTTP()
